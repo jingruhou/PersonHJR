@@ -113,6 +113,7 @@ for idx, face in enumerate(faces):
     print("\t 人脸框:%s" % (face.bbox.astype(np.int).flatten()))  # 人脸框大小
     print("\t 人脸关键点:%s" % (face.landmark.astype(np.int).flatten()))  # 人脸关键点坐标值
     print("##############################################################################")
+    # 保存每一个人脸元数据为单个文件
     save_face_metadata("face_meta_data/"+"face"+str(idx)+".txt", str(face))
 
 
