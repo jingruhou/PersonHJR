@@ -5,13 +5,42 @@ import urllib
 import urllib.request
 import cv2
 import numpy as np
-
+import struct
 """
     @Time    : 2020/2/10/0018 10:02
     @Author  : houjingru@semptian.com
     @FileName: insightfaceDemo.py
     @Software: PyCharm
 """
+
+
+def save_feature(feature_file_name, feature_data, dim_num):
+    """
+    512维人脸特征embedding写入指定文件
+    :param feature_file_name:
+    :param feature_data:
+    :param dim_num:
+    :return:
+    """
+    with open(feature_file_name, 'wb') as fd:
+        fd.write(struct.pack('i', 1))
+        fd.write(struct.pack('i', dim_num))
+        for i in range(len(feature_data)):
+            fd.write(struct.pack('f', feature_data[i]))
+        fd.close()
+
+
+def save_face_metadata(metadata_file_name, metadata):
+    """
+    保存人脸属性信息/人物元数据
+    :param metadata_file_name:
+    :param metadata:
+    :return:
+        face = Face(bbox = bbox, landmark = landmark, det_score = det_score, embedding = embedding,
+        gender = gender, age = age, normed_embedding=normed_embedding, embedding_norm = embedding_norm)
+    """
+    with open(metadata_file_name, 'w') as meta:
+        meta.write(metadata)
 
 
 def url_to_image(url):
@@ -21,8 +50,8 @@ def url_to_image(url):
     :return:
     """
     resp = urllib.request.urlopen(url)  # 打开url
-    image = np.asarray(bytearray(resp.read()), dtype="uint8")  #
-    image = cv2.imdecode(image, cv2.IMREAD_COLOR)  #
+    image = np.asarray(bytearray(resp.read()), dtype="uint8")
+    image = cv2.imdecode(image, cv2.IMREAD_COLOR)
     return image
 
 
@@ -49,6 +78,7 @@ model.prepare(ctx_id=ctx_id, nms=0.4)
     4 加载图片到模型
 """
 faces = model.get(img)
+
 """
     5 循环打印每一张人脸的相关信息 - 英文输出
 """
@@ -66,7 +96,6 @@ for idx, face in enumerate(faces):
     print("\t bbox:%s" % (face.bbox.astype(np.int).flatten()))  # 人脸框大小
     print("\t landmark:%s" % (face.landmark.astype(np.int).flatten()))  # 人脸关键点坐标值
     print("##############################################################################")
-
 """
     5 循环打印每一张人脸的相关信息 - 中文输出
 """
@@ -84,6 +113,7 @@ for idx, face in enumerate(faces):
     print("\t 人脸框:%s" % (face.bbox.astype(np.int).flatten()))  # 人脸框大小
     print("\t 人脸关键点:%s" % (face.landmark.astype(np.int).flatten()))  # 人脸关键点坐标值
     print("##############################################################################")
+    save_face_metadata("face_meta_data/"+"face"+str(idx)+".txt", str(face))
 
 
 def compute_sim(img1, img2):
