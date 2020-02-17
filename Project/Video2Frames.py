@@ -19,6 +19,7 @@ frame_interval = int(sys.argv[2])
 
 # 列出文件夹下所有的视频文件
 filenames = os.listdir(input_path)
+print(filenames)
 
 # 获取文件夹名称
 video_prefix = input_path.split(os.sep)[-1]
@@ -47,12 +48,15 @@ for filename in filenames:
 
     for i in range(n_frames):
         ret, frame = cap.read()
+        # 跳出判断语句
+        if ret == False or frame is None:
+            break
 
         # 每隔frame_interval帧进行一次截屏操作
         if i % frame_interval == 0:
             imagename = '{}_{}_{:0>6d}.jpg'.format(video_prefix, filename.split('.')[0], i)
             imagepath = os.sep.join([frame_path, imagename])
-            print('exported {}!'.format(imagepath))
+            print('exported {}'.format(imagepath))
             cv2.imwrite(imagepath, frame)
 
 # 执行结束释放资源
