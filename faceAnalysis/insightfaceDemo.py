@@ -64,7 +64,7 @@ def url_to_image(url):
 """
     1 读取图片
 """
-img = cv2.imread('C:/Users/user/PycharmProjects/PersonHJR/Resource/HJR.jpg')
+img = cv2.imread('C:/Users/user/PycharmProjects/PersonHJR/Resource/XJP6.jpg')
 """
     2 加载相关预训练模型
 """
@@ -114,7 +114,7 @@ for idx, face in enumerate(faces):
     print("\t 人脸关键点:%s" % (face.landmark.astype(np.int).flatten()))  # 人脸关键点坐标值
     print("##############################################################################")
     # 保存每一个人脸元数据为单个文件
-    save_face_metadata("face_meta_data/"+"face"+str(idx)+".txt", str(face))
+    save_face_metadata("XJP6/"+"face"+str(idx)+".txt", str(face))
 
 
 def compute_sim(img1, img2):
