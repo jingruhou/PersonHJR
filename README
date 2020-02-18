@@ -1,21 +1,3 @@
-pip安装相关库
+pip安装相关库-使用国内清华pip源
 
-【1】
-pip install -i https://pypi.tuna.tsinghua.edu.cn/simple opencv-python==3.4.9.31
-【2】
-
-【3】
-
-【4】
-
-【5】
-
-【6】
-
-【7】
-
-【8】
-
-【9】
-
-【10】
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple requirements.txt
