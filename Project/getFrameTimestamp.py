@@ -6,7 +6,7 @@ import cv2
     @FileName: getFrameTimestamp.py
     @Software: PyCharm
 """
-cap = cv2.VideoCapture('C:/Users/user/PycharmProjects/PersonHJR/Resource/1.mp4')
+cap = cv2.VideoCapture('C:/Users/user/PycharmProjects/PersonHJR/Resource/Video/1.mp4')
 success, frame = cap.read()
 
 while success:
