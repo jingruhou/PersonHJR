@@ -63,6 +63,7 @@ def url_to_image(url):
 # url = 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=114152109,1519523342&fm=26&gp=0.jpg'
 
 # img = url_to_image(url)
+
 """
     1 读取图片
 """
@@ -77,8 +78,11 @@ ctx_id = -1  # CPU模式-初始化时通过ctx参数指定设备
     3 预设模型参数
 """
 model.prepare(ctx_id=ctx_id, nms=0.4)
-
+"""
+    4 加载图片文件夹到模型,并且循环打印结果
+"""
 x = 0
+# os.walk()返回结果：文件夹根路径dir_path, 文件夹名称dir_names, 文件名称file_names
 for root, dirs, frames in os.walk("C:/Users/user/PycharmProjects/PersonHJR/Resource/Video_frames"):
     for d in dirs:
         print(d)  # 打印子文件夹的个数
@@ -107,14 +111,6 @@ for root, dirs, frames in os.walk("C:/Users/user/PycharmProjects/PersonHJR/Resou
             save_face_metadata("C:/Users/user/PycharmProjects/PersonHJR/faceAnalysis/faces_metadata/"
                                + frame.split('.')[0] + "_" + "face" + str(idx) + ".txt", str(face))
             # save_face_metadata("1/" + "face" + str(idx) + ".txt", str(face))
-"""
-    4 加载图片到模型
-"""
-# faces = model.get(img)
-
-"""
-    4 加载图片文件夹到模型
-"""
 
 # """
 #     5 循环打印每一张人脸的相关信息 - 英文输出
@@ -133,9 +129,10 @@ for root, dirs, frames in os.walk("C:/Users/user/PycharmProjects/PersonHJR/Resou
 #     print("\t bbox:%s" % (face.bbox.astype(np.int).flatten()))  # 人脸框大小
 #     print("\t landmark:%s" % (face.landmark.astype(np.int).flatten()))  # 人脸关键点坐标值
 #     print("##############################################################################")
-"""
-    5 循环打印每一张人脸的相关信息 - 中文输出
-"""
+
+# """
+#    5 循环打印每一张人脸的相关信息 - 中文输出
+# """
 # for idx, face in enumerate(faces):
 #     print("人脸 [%d]:" % idx)  # 人脸编号
 #     print("\t 年龄:%d" % face.age)  # 年龄
