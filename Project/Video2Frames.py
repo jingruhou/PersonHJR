@@ -89,15 +89,9 @@ for file_name in file_names:
             frame_time_stamp = get_frame_timestamp(cap)
             print(frame_time_stamp)
 
-            imagename = '{}_{}_{:0>6d}_{}_{}_{}_{}.jpg'.format(video_prefix,
-                                                               file_name.split('.')[0],
-                                                               i,
-                                                               frame_time_stamp[0],
-                                                               frame_time_stamp[1],
-                                                               frame_time_stamp[2],
-                                                               frame_time_stamp[3])
-            imagepath = os.sep.join([frame_path, imagename])
-            print('exported {}'.format(imagepath))
-            cv2.imwrite(imagepath, frame)
+            image_name = '{}_{}_{:0>6d}_{}_{}_{}_{}.jpg'.format(video_prefix, file_name.split('.')[0], i, frame_time_stamp[0], frame_time_stamp[1], frame_time_stamp[2], frame_time_stamp[3])
+            image_path = os.sep.join([frame_path, image_name])
+            print('exported {}'.format(image_path))
+            cv2.imwrite(image_path, frame)
 # 执行结束释放资源
 cap.release()

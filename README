@@ -1,3 +1,5 @@
-pip安装相关库-使用国内清华pip源
+pip安装相关库-使用国内清华源
 
 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple requirements.txt
+
+Note:最后输出的项目里面所有的路径必须指定为 相对路径
