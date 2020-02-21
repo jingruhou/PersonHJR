@@ -27,52 +27,43 @@ def split_face_data(face_data):
     :param face_data:人脸元数据/文本内容
     :return:face_meta_data list
     """
-    # 检索文件内容“normed_embedding”检索人脸正则化后的特征
-# out=str.replace('[','').replace(']','')
-
-# face0 = read_face_data("./faces_metadata/Video_1_000000_0_0_1_680_face0.json")
-# face0_embedding = np.array(face0['embedding'].replace('[', '').replace(']', '').split(" "))
-# face0_normed_embedding = np.array(face0['normed_embedding'].replace('[', '').replace(']', '').split(" "))
-#
-# face1 = read_face_data("./faces_metadata/Video_1_000025_0_0_2_680_face0.json")
-# face1_embedding = np.array(face1['embedding'].replace('[', '').replace(']', '').split(" "))
-# face1_normed_embedding = np.array(face1['normed_embedding'].replace('[', '').replace(']', '').split(" "))
-
-# sim = np.dot(face0_embedding, face1_embedding) / (norm(face0_embedding) * norm(face1_embedding))
-# print(sim)
+    face_tmp1 = face_data['embedding'].strip('[]')
+    face_tmp2 = face_tmp1.split()
+    return face_tmp2
 
 
-face0 = read_face_data("./faces_metadata/Video_1_000000_0_0_1_680_face0.json")
-# face0_tmp1 = face0['embedding'].replace('[', '').replace(']', '')
-# 去掉换行和空格，然后一个一个float32传给array
-
-print(face0['embedding'])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-def compute_sim(self, img1, img2):
+def compute_sim(embedding1, embedding2):
     """
         计算余弦相似度
-    :param self:
-    :param img1: 图片1
-    :param img2: 图片2
+    :param embedding1: 图片1
+    :param embedding2: 图片2
     :return: 相似度
     """
-    emb1 = self.get_embedding(img1).flatten()
-    emb2 = self.get_embedding(img2).flatten()
     from numpy.linalg import norm
-    sim = np.dot(emb1, emb2) / (norm(emb1) * norm(emb2))
-    return sim
+    sim_emb = np.dot(embedding1, embedding2) / (norm(embedding1) * norm(embedding2))
+    return sim_emb
+
+
+########################################################################################################################
+face0 = read_face_data("./faces_metadata/Video_1_000000_0_0_1_680_face0.json")
+face0_embedding = split_face_data(face0)
+# face0_embedding格式为list，其中每一个value为str，需要转化为float32
+face0_embedding_float = []
+for index, value in enumerate(face0_embedding):
+    item_float = float(value)
+    face0_embedding_float.append(item_float)
+print(face0_embedding_float)
+
+########################################################################################################################
+face1 = read_face_data("./faces_metadata/Video_1_000025_0_0_2_680_face0.json")
+face1_embedding = split_face_data(face1)
+# face1_embedding格式为list，其中每一个value为str，需要转化为float32
+face1_embedding_float = []
+for index, value in enumerate(face1_embedding):
+    item_float = float(value)
+    face1_embedding_float.append(item_float)
+print(face1_embedding_float)
+
+# 计算余弦相似度
+sim_embedding = compute_sim(face0_embedding_float, face1_embedding_float)
+print("相似度为：%s" % sim_embedding)
