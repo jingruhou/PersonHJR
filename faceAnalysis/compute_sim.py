@@ -62,7 +62,7 @@ def compute_sim_batch(face_meta_data_file_path, faces_meta_data_dir):
     for index, value in enumerate(embedding1):  # 每一个value转化为float
         item_float = float(value)
         face_embedding1_float.append(item_float)
-    print(face1_id, face_embedding1_float)
+    # print(face1_id, face_embedding1_float)
 
     root_dir = faces_meta_data_dir
     frame_list = os.listdir(root_dir)
@@ -75,7 +75,7 @@ def compute_sim_batch(face_meta_data_file_path, faces_meta_data_dir):
             for index, value in enumerate(embedding_idx):
                 item_float = float(value)
                 face_embedding_idx_float.append(item_float)
-            print(face_idx, face_embedding_idx_float)
+            # print(face_idx, face_embedding_idx_float)
 
             # 计算相似度
             from numpy.linalg import norm
@@ -85,8 +85,27 @@ def compute_sim_batch(face_meta_data_file_path, faces_meta_data_dir):
     return sim_dict  # 返回目标和所有人脸特征的相似度字典列表
 
 
-sim = compute_sim_batch("./faces_metadata/Video_1_000000_0_0_1_680_face0.json", "./faces_metadata/")
+sim = compute_sim_batch("./faces_metadata/Video_c1_000000_0_0_1_750_face0.json", "./faces_metadata/")
 print(sim)
+
+# 按照相似度值大小进行排序 reverse=True 降序排列
+sorted_sim = sorted(sim.items(), key=lambda x: x[1], reverse=True)
+print(sorted_sim)
+# 逐个打印key:value
+# for idx in range(len(sorted_sim)):
+#     print(sorted_sim[idx])
+
+# 通过设置置信度的阈值参数
+threshold = 0.5
+# 比较排序后的相似度值与阈值的大小，
+# 若大于阈值，则认为是同一个face；若小于阈值，则认为是不同的face
+face_count = 0
+for index in range(len(sorted_sim)):
+    if sorted_sim[index][1] > threshold:
+        print(sorted_sim[index])
+        # 统计同一个face的次数
+        face_count += 1
+print("Face0出现的次数为： %s" % face_count)
 
 
 # ########################################################################################################################

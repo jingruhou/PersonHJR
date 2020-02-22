@@ -207,7 +207,7 @@ for root, dirs, frames in os.walk("C:/Users/user/PycharmProjects/PersonHJR/Resou
             #                              frame.split('.')[0] + "_" + "face" + str(idx) + ".txt",
             #                              str(face.landmark.astype(np.int).flatten()))
 
-            # save_face_metadata("1/" + "face" + str(idx) + ".txt", str(face))
+            # save_face_metadata("sorted_sim/" + "face" + str(idx) + ".txt", str(face))
             # save_face_meta_data_standard("C:/Users/user/PycharmProjects/PersonHJR/faceAnalysis/faces_metadata/" + frame.split('.')[0] + "_" + "face" + str(idx) + ".txt", str(face))
 
 
@@ -266,7 +266,7 @@ def compute_sim(img1, img2):
     :param img2: 图片2
     :return: 相似度
 
-    Note1:余弦相似度取值[-1， 1]，值趋于1，表示两个向量的相似度越高。
+    Note1:余弦相似度取值[-sorted_sim， sorted_sim]，值趋于1，表示两个向量的相似度越高。
         余弦相似度与向量的幅值无关，只与向量的方向相关
 
     Note2:余弦相似度用向量空间中两个向量夹角的余弦值作为衡量两个个体间差异的大小。

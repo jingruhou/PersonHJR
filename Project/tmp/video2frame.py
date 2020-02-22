@@ -6,7 +6,7 @@ import cv2
     @FileName: video2frame.py
     @Software: PyCharm
 """
-path = '../Resource/1.mp4'
+path = '../Resource/sorted_sim.mp4'
 cap = cv2.VideoCapture(path)
 suc = cap.isOpened()  # 是否成功打开
 frame_count = 0

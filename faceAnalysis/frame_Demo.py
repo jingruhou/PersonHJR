@@ -64,9 +64,9 @@ def url_to_image(url):
 
 # img = url_to_image(url)
 """
-    1 读取图片
+    sorted_sim 读取图片
 """
-img = cv2.imread('C:/Users/user/PycharmProjects/PersonHJR/Resource/1.jpg')
+img = cv2.imread('C:/Users/user/PycharmProjects/PersonHJR/Resource/sorted_sim.jpg')
 """
     2 加载相关预训练模型
 """
@@ -85,7 +85,7 @@ model.prepare(ctx_id=ctx_id, nms=0.4)
 #     for frame in frames:
 #         # 读入图像
 #         img_path = root + "/" + frame
-#         img = cv2.imread(img_path, 1)
+#         img = cv2.imread(img_path, sorted_sim)
 #
 #         faces = model.get(img)
 #
@@ -130,7 +130,7 @@ for idx, face in enumerate(faces):
     print("\t 人脸关键点:%s" % (face.landmark.astype(np.int).flatten()))  # 人脸关键点坐标值
     print("##############################################################################")
     # 保存每一个人脸元数据为单个文件
-    save_face_metadata("1/" + "face" + str(idx) + ".txt", str(face))
+    save_face_metadata("sorted_sim/" + "face" + str(idx) + ".txt", str(face))
 
 
 
