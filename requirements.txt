@@ -7,7 +7,7 @@ graphviz==0.8.4
 idna==2.6
 imageio==2.6.1
 insightface==0.1.5
-joblib==0.14.1
+joblib==1.2.0
 kiwisolver==1.1.0
 matplotlib==3.1.2
 mxnet-cu80==1.6.0b20190918
